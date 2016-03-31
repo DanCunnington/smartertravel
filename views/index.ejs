@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Smarter Travel</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		 <script src="js/leaflet.geometryutil.js"></script>
+
+		<script src="js/ejs_production.js"></script>
+
+		<!--<script src='http://localhost:8000/faye/client.js'></script>-->
+		<script src="js/fayeInclude.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/operators.js"></script>
+	</head>
+
+	<body>	
+
+
+		<div id="route_picker">
+		  
+		    <div>
+		      <select name="operator" id="operator_picker">
+                <option value="pick" selected>Pick operator...</option>
+                <option value="loading">Loading...</option>
+              </select>
+            </div>
+            <div>
+		      <select name="line" id="line_picker" style="display:none;">
+                <option value="pick" selected>Pick line name/number</option>
+                <option value="loading">Loading...</option>
+              </select>
+            </div>
+            
+            <div id="status_box">
+              <img id="spinner" style="display:none;" src="https://stanfy.com/wp-content/uploads/2015/09/1-V3h-VWthi5lL0QySF6qZPw.gif" width="30px">
+              <span id="status"></span>
+            </div>
+            
+            <div id="counts">
+            </div>
+
+		  </div>
+		  
+		  
+          <div id="appmetrics">
+            <p>Watson Calls: <span id="watsonCalls"></span><p>
+            <p>TransportAPI Calls: <span id="transportAPICalls"></span><p>
+          </div>
+	
+		<div id="map">
+		
+		  
+		</div>
+	</body>
+</html>
