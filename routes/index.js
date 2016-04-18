@@ -22,7 +22,7 @@ var visual_recognition = watson.visual_recognition({
 
 
 var fs = require('fs');
-var xml2js = require('xml2js');
+//var xml2js = require('xml2js');
 var jsonfile = require('jsonfile');
 
 var db = require('../utils/db.js');
@@ -40,7 +40,6 @@ router.get('/', function(req, res, next) {
 // router.get('/test', function(req,res,next) {
 //     client.publish('/test',{test: "testing aaron"});
 // });
-
 
 
 //Initial aim - Show disruption over the last week for a specified bus route
@@ -195,7 +194,7 @@ function getTweetsForBusStops(operator,number,busStops,callback) {
 
             //Make a request to transport api
             url = 'http://transportapi.com/v3/uk/buzz/tweets.json?' + 
-              'app_id='process.env.TRANSPORT_API_APP_ID'&app_key='process.env.TRANSPORT_API_APP_KEY'&' +
+              'app_id='+process.env.TRANSPORT_API_APP_ID+'&app_key='+process.env.TRANSPORT_API_APP_KEY+'&' +
               'q=bus&' +
               'limit=1000&' + 
               'within='+box.sw.lon+','+box.sw.lat+','+box.ne.lon+','+box.ne.lat;
