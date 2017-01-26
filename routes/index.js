@@ -13,11 +13,17 @@ var alchemy_language = watson.alchemy_language({
   api_key: process.env.WATSON_ALCHEMY_KEY
 });
 
+// var visual_recognition = watson.visual_recognition({
+//   username: process.env.WATSON_VISUAL_RECOGNITION_USERNAME,
+//   password: process.env.WATSON_VISUAL_RECOGNITION_PASSWORD,
+//   version: 'v2-beta',
+//   version_date: '2015-12-02'
+// });
+
 var visual_recognition = watson.visual_recognition({
-  username: 'process.env.WATSON_VISUAL_RECOGNITION_USERNAME',
-  password: 'process.env.WATSON_VISUAL_RECOGNITION_PASSWORD',
-  version: 'v2-beta',
-  version_date: '2015-12-02'
+  api_key: process.env.WATSON_VISUAL_RECOGNITION_KEY_V3,
+  version: 'v3',
+  version_date:'2016-05-20'
 });
 
 
@@ -452,9 +458,13 @@ router.get('/classifyImage/:filename', function(req,res,next) {
     //parameter. The service returns classifiers that meet a threshold score of at least 0.5. 
     //If no classifiers receive a score greater than 0.5, then no classifiers are returned.
     var filename = req.params.filename;
+    // var params = {
+    //   images_file: fs.createReadStream('public/cameraImages/'+filename),
+    //   classifier_ids: ['smartertravel_1454588344']
+    // };
     var params = {
       images_file: fs.createReadStream('public/cameraImages/'+filename),
-      classifier_ids: ['smartertravel_1454588344']
+      classifier_ids: ['newnighttime_1076758416']
     };
 
     visual_recognition.classify(params, function(err, response) {
@@ -468,14 +478,19 @@ router.get('/classifyImage/:filename', function(req,res,next) {
 
         //Get score and classification
         var result = response.images[0];
-        if (result.scores) {
-            result = result.scores[0];        
-            //this indicates a positive classification
-            res.json({classification: "Congested", confidence: result.score})
+        // if (result.scores) {
+        //     result = result.scores[0];        
+        //     //this indicates a positive classification
+        //     res.json({classification: "Congested", confidence: result.score})
+        // } else {
+        //     res.json({classification: "Not Congested"});
+        // }
+        if (result.classifiers.length > 0 && result.classifiers[0].classes[0].class === 'congested') {
+            var score = result.classifiers[0].classes[0].score;
+            res.json({classification: "Congested", confidence: score});
         } else {
             res.json({classification: "Not Congested"});
         }
-
       }
         
     });
